@@ -1,43 +1,52 @@
 def dist_money(money, children)
-  # Guard clause 1: If at least 1 child cannot have 1, then we cannot distribute according to the rules
-  pp -1 if money < children
+  # Return -1 (impossible) if we cannot give every child at least 1
   return -1 if money < children
-  # Guard clause 2: If every child can have exactly 8, return the number of children
-  pp children if money * 8 == children
-  return children if money * 8 == children
 
-  # Now, we give every child at least 1
+  # Return children if all children can get 8
+  return children if children * 8 == money
+
+  # Now distribute 1 to every child to satisfy first constraint
   money -= children
 
-  # If, by giving everyone 1, we cannot make at least 8 elsewhere, return 0
-  pp 0 if money < 7
+  # If we don't have at least 7 leftover, then no one can get 8
+  # So we return 0
   return 0 if money < 7
-  pp children - 1 if money > children * 7
   return children - 1 if money > children * 7
 
-  # Now, we see how many times we can distribute exactly 7 to another child
-  winners, rem = money.divmod(7)
+  # Divide money by 7 to know how many children can get exactly 8 (they already have 1)
+  # Keep the remainder for future calcs
+  eights, rem = money.divmod(7)
 
-  if money.zero?
-    pp winners
-  elsif children == winners + 1 && rem == 3
-    pp winners - 1
+  # If our remainder is positive AND all of the children can get 8, then we have leftover
+  # cash to distribute, and so we give it all to one child and maximize the number of recipients
+  # getting 8 (i.e., children - 1)
+  return children - 1 if rem >= eights * 7
+
+  # If we have one fewer eights than we have children AND our remainder is exactly 3,
+  # then we need to avoid giving the non-8 child 4 by taking away one 8 and redistributing
+  # This means we will have eights - 1 as our maximum 8 distribution
+  # Otherwise, we can always avoid 4, and thus we return all the eights as our answer
+  if eights == children - 1 && rem == 3
+    eights - 1
   else
-    pp winners
+    eights
   end
 end
 
 # money    = 20
 # children = 3
 
-money    = 17
-children = 2
+# money    = 17
+# children = 2
 
 # money = 16
 # children = 2
 
 # money    = 11
 # children = 2
+
+money = 23
+children = 2
 
 dist_money(money, children)
 
