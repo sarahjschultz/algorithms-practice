@@ -11,16 +11,14 @@ def dist_money(money, children)
   # If we don't have at least 7 leftover, then no one can get 8
   # So we return 0
   return 0 if money < 7
+  # If giving EVERY child 8 would leave money leftover, then we know
+  # at least one of the children needs to get the remainder, so we
+  # return one less than total children for our answer
   return children - 1 if money > children * 7
 
   # Divide money by 7 to know how many children can get exactly 8 (they already have 1)
   # Keep the remainder for future calcs
   eights, rem = money.divmod(7)
-
-  # If our remainder is positive AND all of the children can get 8, then we have leftover
-  # cash to distribute, and so we give it all to one child and maximize the number of recipients
-  # getting 8 (i.e., children - 1)
-  return children - 1 if rem >= eights * 7
 
   # If we have one fewer eights than we have children AND our remainder is exactly 3,
   # then we need to avoid giving the non-8 child 4 by taking away one 8 and redistributing
