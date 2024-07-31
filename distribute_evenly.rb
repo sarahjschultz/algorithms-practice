@@ -6,10 +6,10 @@
 def pay_people(recipients, money)
   owed = recipients.values.reduce(&:+)
 
-  off_by = 1 - money.to_f / owed
+  off_by = money.to_f / owed
 
   recipients.each_pair do |payee, amt|
-    recipients[payee] = amt - (amt * off_by)
+    recipients[payee] = amt * off_by
   end
 
   pp recipients
