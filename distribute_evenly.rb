@@ -6,6 +6,8 @@
 def pay_people(recipients, money)
   owed = recipients.values.reduce(&:+)
 
+  return recipients if money > owed
+
   off_by = money.to_f / owed
 
   recipients.each_pair do |payee, amt|

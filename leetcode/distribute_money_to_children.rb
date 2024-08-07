@@ -43,7 +43,7 @@ end
 # money    = 11
 # children = 2
 
-money = 23
+money    = 23
 children = 2
 
 dist_money(money, children)
