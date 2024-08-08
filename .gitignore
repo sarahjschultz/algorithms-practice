@@ -1,2 +1,4 @@
 .idea/
 leetcode/unit_conversion.rb
+logfile.txt
+parse_logfile.rb
