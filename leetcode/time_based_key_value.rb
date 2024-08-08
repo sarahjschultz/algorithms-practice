@@ -37,3 +37,9 @@ class TimeMap
     result
   end
 end
+
+# Questions to ask:
+# 1. In the getter, what should we return if we find nothing?
+# 2. In the getter, would it be valuable to return the closest (but not future) value we have stored relative to the timestamp?
+# 3. Do we need any kind of eviction policy?
+# 4. Are all inserts presumed to be current -- meaning, will the times naturally sort themselves?

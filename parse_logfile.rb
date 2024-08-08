@@ -68,8 +68,9 @@ class ComputeLogfileStats
         pp request_path = request_path.flatten
         file_stats << {
           "request_identifier": "#{method_type.to_s} #{request_path}",
-          "called": request_path[:count].to_i,
+          "called":             request_path[:count].to_i,
           "response_time_mean": compute_response_mean(request_path)
+          # TODO: Compute median (middle)
           # "response_time_median": compute_response_median(request_path)
         }
       end
@@ -79,7 +80,7 @@ class ComputeLogfileStats
 
   def compute_response_mean(request_count_obj)
     connection_times_total = request_count_obj[:connect_times].reduce(&:+)
-    service_times_total = request_count_obj[:service_times].reduce(&:+)
+    service_times_total    = request_count_obj[:service_times].reduce(&:+)
 
     (connection_times_total + service_times_total) / (request_count_obj[:connect_times] + request_count_obj[:service_times])
   end
