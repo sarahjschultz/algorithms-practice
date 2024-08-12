@@ -10,7 +10,7 @@ def add_bold_tag(s, words)
     # with an offset of 0 because we want to look at the beginning
     found = s.index(word, 0)
     prev_bolded = 0
-    while found != nil
+    until found.nil?
       start = [found, prev_bolded].max
       prev_bolded = found+word.length
       (start...prev_bolded).each do |i|
