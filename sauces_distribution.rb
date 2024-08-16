@@ -37,5 +37,5 @@ def locations_for_fulfillment(order)
 end
 
 # order = { J: 3, H: 2, S: 4 } # V, M, H
-order = { J: 0, H: 7, S: 1 } # V, M, H
+order = { J: 0, H: 7, S: 1 } # C
 locations_for_fulfillment(order)
