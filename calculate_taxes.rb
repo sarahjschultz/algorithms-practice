@@ -65,7 +65,6 @@ class FederalTaxCalculator
     }
   }.freeze
 
-
   def initialize(record)
     @taxable_income = record.fetch(:income, 0)
     @filing_status  = record.fetch(:status, "single").downcase.split(" ").join("_").to_sym
@@ -101,7 +100,6 @@ class FederalTaxCalculator
                          end
     rate * amount_for_bracket
   end
-
 end
 
 payroll = CalculatePayroll.new
