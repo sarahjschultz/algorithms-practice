@@ -83,8 +83,9 @@ class FederalTaxCalculator
     # In this case, we want to tax the full bracket max of the taxable income
     # And we should remove this amount from the taxable income so that we do not double tax any amount
     amount_for_bracket = if @taxable_income > bracket.max
-                           @taxable_income -= bracket.max
-                           bracket.max
+                           bracket_range = bracket.max - bracket.min
+                           @taxable_income -= bracket_range
+                           bracket_range
                          #  Case 2: We have taxed the full income and thus, should not apply further tax
                          # In this case, we return a 0 for the bracket
                          elsif @taxable_income <= 0
